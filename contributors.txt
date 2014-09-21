@@ -2,3 +2,4 @@ Contributors
 ------------
 
 - Jeremy L. Grajales <jeremygrajales@gmail.com>
+- Toby Blanchard <blanchard.toby@gmail.com>
