@@ -1,4 +1,4 @@
 Contributors
 ------------
 
-- Jeremy L. Grajales <jeremygrajales@gmail.com>
+- Jeremy L. Grajales <jeremygrajales@gmail.com> 
