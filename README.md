@@ -1,1 +1,1 @@
-Description: This is an online car rental system written in Java.
+Project Description: This is an online car rental system written in Java.
