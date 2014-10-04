@@ -1,4 +1,5 @@
 <%@ include file="layouts/header.jsp" %>
+<h1>Sign Up</h1>
 <form action="" method="post">
 		<p><label>First Name:</label> <input type="text" name="namefirst" placeholder='Enter First Name'></p>
 		<p><label>Last Name:</label> <input type="text" name="namelast" placeholder='Enter Last Name'></p>
