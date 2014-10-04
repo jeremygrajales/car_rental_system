@@ -58,4 +58,7 @@ color: white;
 #header h1{
 	color: white;
 }
+#navigation a:hover{
+	text-decoration: underline;
+}
 
