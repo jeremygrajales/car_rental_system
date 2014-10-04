@@ -1,4 +1,4 @@
-<%@ include file="header.jsp" %>
+<%@ include file="layouts/header.jsp" %>
 <form action="" method="post">
 		<p><label>First Name:</label> <input type="text" name="namefirst" placeholder='Enter First Name'></p>
 		<p><label>Last Name:</label> <input type="text" name="namelast" placeholder='Enter Last Name'></p>
@@ -114,7 +114,7 @@
 		<p><label>City:</label> <input type="text" name="city" placeholder='Enter Last Name'></p>
 		<p><label>State:</label>
 		<select name="state" size="1">
-			<option selected value="">State...</option>
+			<option selected value="">-- Select State --</option>
 			<option value="AL">Alabama</option>
 			<option value="AK">Alaska</option>
 			<option value="AZ">Arizona</option>
@@ -172,4 +172,4 @@
 		<p><label>Password:</label> <input type="text" name="password" placeholder='**********'></p>
 		<p><label>Re-enter Password:</label> <input type="text" name="repassword" placeholder='**********'></p>
 </form>
-<%@ include file="footer.jsp" %>
+<%@ include file="layouts/footer.jsp" %>
