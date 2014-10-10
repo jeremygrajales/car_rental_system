@@ -30,7 +30,8 @@
 <form action="" method="post">
 		<p><label>Email:</label> <input type="text" name="email" placeholder='example@email.com'></p>
 		<p><label>Password:</label> <input type="text" name="password" placeholder='**********'></p>
-		<button>Submit</button>
+		<input type="submit" name="submit" value="Submit"/>
+		
 </form>
 
 <%@ include file="layouts/footer.jsp" %>
