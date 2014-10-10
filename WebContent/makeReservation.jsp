@@ -220,4 +220,4 @@
   
 </div>
 
-<%@include file="footer.jsp" %>
+<%@include file="layouts/footer.jsp" %>
