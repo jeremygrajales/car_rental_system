@@ -5,7 +5,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
 <%@ include file="layouts/header.jsp" %>
 <%
-
 	// Retreive form input
 	String email = request.getParameter("email");
 	String password = request.getParameter("password");
@@ -24,14 +23,11 @@
 	}
 	// Otherwise show them the login form
 %>
-
-<h1>Login</h1>
-<div class="error"><% out.print(error); %></div>
-<form action="" method="post">
-		<p><label>Email:</label> <input type="text" name="email" placeholder='example@email.com'></p>
-		<p><label>Password:</label> <input type="text" name="password" placeholder='**********'></p>
-		<input type="submit" name="submit" value="Submit"/>
-		
-</form>
-
+			<h1>Login</h1>
+			<div class="error"><% out.print(error); %></div>
+			<form action="" method="post">
+				<p><label>Email:</label> <input type="text" name="email" placeholder='example@email.com'></p>
+				<p><label>Password:</label> <input type="password" name="password" placeholder='**********'></p>
+				<input type="submit" name="submit" value="Submit"/>
+			</form>
 <%@ include file="layouts/footer.jsp" %>
