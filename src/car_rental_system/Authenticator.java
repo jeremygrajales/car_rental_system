@@ -14,7 +14,7 @@ public class Authenticator {
 		Connection conn = Database.connect();
 
 		// Make SQL query
-		String query = "SELECT * FROM `customer` WHERE `cust_email`='"+email+"';";
+		String query = "SELECT * FROM `customer` WHERE `email`='"+email+"';";
 
 		Statement stmt = null;
 		try {
@@ -23,25 +23,28 @@ public class Authenticator {
 			
 			// Return result
 			ResultSet result = stmt.executeQuery(query);
-			result.next();
+			if(result.next()) {
 			
-			// Get salt from hash
-			String[] hashTuple = result.getString("hash").split(":");
-			String originalHash = hashTuple[0];
-			String salt = hashTuple[1];
-			
-			// Recreate hash
-			String newHash = hash(password, salt);
-			
-			// Return TRUE if we found a user with given credentials, else return FALSE
-			return newHash.equals(originalHash);
-			
+				// Get salt from hash
+				String[] hashTuple = result.getString("hash").split(":");
+				if(hashTuple.length == 2) {
+					String originalHash = hashTuple[0];
+					String salt = hashTuple[1];
+					
+					// Recreate hash
+					String newHash = hash(password, salt);
+					
+					// Return TRUE if we found a user with given credentials, else return FALSE
+					return newHash.equals(originalHash);
+				}
+
+			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
-		return false;
+		return true; // true until hash() implemented
 
 	}
 
