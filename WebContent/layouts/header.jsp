@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>Thunder Chickens Car Rental Service</title>
 <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body>
@@ -14,6 +14,7 @@
 </div>
 <div id="navigation">
 	<ul>
+	<li><a href=dashboard.jsp>Home</a></li>
 	<li><a href=createUser.jsp>Create User</a></li>
 	<li><a href=login.jsp>Login</a></li>
 	<li><a href=makeReservation.jsp>Make Reservation</a></li>

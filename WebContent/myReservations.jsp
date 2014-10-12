@@ -1,6 +1,5 @@
 <%@include file="layouts/header.jsp" %>
-<div id="container">  
- <div id="content">
+
   <form>
       <fieldset>
 		<h1 style="text-align: center;">My Reservations</h1>
@@ -59,9 +58,7 @@
 			<button type="button">Submit</button>
           </fieldset>
   </form> 
- </div>
-  
-</div>
 
 
-<%@include file="footer.jsp" %>
+
+<%@include file="layouts/footer.jsp" %>

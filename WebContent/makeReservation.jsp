@@ -1,7 +1,6 @@
 <%@include file="layouts/header.jsp" %>
 
-<div id="container">  
- <div id="content">
+
   <form method="post" action="">
       <fieldset>
 		<h1 style="text-align: center;">Make Reservation</h1>
@@ -216,8 +215,6 @@
 			<input type="submit" value="Submit"/>
           </fieldset>
   </form> 
- </div>
-  
-</div>
+
 
 <%@include file="layouts/footer.jsp" %>
