@@ -2,6 +2,10 @@ package car_rental_system;
 
 import java.sql.*;
 
+import java.security.SecureRandom; //get salt
+import java.security.NoSuchAlgorithmException;// req'd exception error
+import java.security.MessageDigest;//convert to sha1-256
+
 public class Authenticator {
 
 	public static boolean authenticate(String email, String password) {
@@ -47,16 +51,42 @@ public class Authenticator {
 		return true; // true until hash() implemented
 
 	}
-
+	// salt = mcrypt(random integer)
+	public static String getNewSalt() throws NoSuchAlgorithmException {
+		
+		SecureRandom random = new SecureRandom();
+		byte[] salt = new byte[24];
+		random.nextBytes(salt);
+		
+	  return salt.toString();
+	}
+	// hash = SHA256(password+salt)
 	public static String hash(String password, String salt) {
-		return ""; 
+		 
 		// TODO: implement hashing with salt
+		String hashedPassword = null;
+		try 
+		{
+          	MessageDigest md = MessageDigest.getInstance("SHA-256");
+          	md.update(salt.getBytes());
+         	byte[] bytes = md.digest(password.getBytes());
+          	StringBuilder sb = new StringBuilder();
+         
+			  	 for(int i=0; i< bytes.length ;i++)
+         		 {
+              	 sb.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
+         		 }
+			  	 hashedPassword = sb.toString();
+      	} 
+      	catch (NoSuchAlgorithmException e) 
+        {
+           e.printStackTrace();
+        }
 		// return hash and salt in String
 		// use ':' to delimit hash and salt 
 		// eg. hash:salt
-		// salt = mcrypt(random integer)
-		// hash = SHA256(password+salt)
-		// return = hash:salt
+	  // return = hash:salt
+      return hashedPassword + ":" + salt;//hash(password+salt):salt
 	}
 	
 	
