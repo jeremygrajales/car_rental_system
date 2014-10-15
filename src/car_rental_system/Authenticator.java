@@ -76,6 +76,7 @@ public class Authenticator {
          
 			  	 for(int i=0; i< bytes.length ;i++)
          		 {
+			  		 //builds string with padding
 			  		 sb.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
          		 }
 			  	 hashedPassword = sb.toString();
