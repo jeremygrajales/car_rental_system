@@ -54,6 +54,7 @@ public class Authenticator {
 	// salt = mcrypt(random integer)
 	public static String getNewSalt() throws NoSuchAlgorithmException {
 		
+		//generate a new salt and return as a string
 		SecureRandom random = new SecureRandom();
 		byte[] salt = new byte[24];
 		random.nextBytes(salt);
@@ -67,14 +68,15 @@ public class Authenticator {
 		String hashedPassword = null;
 		try 
 		{
-          	MessageDigest md = MessageDigest.getInstance("SHA-256");
+          	//hash(password,salt) as sha-256
+			MessageDigest md = MessageDigest.getInstance("SHA-256");
           	md.update(salt.getBytes());
          	byte[] bytes = md.digest(password.getBytes());
           	StringBuilder sb = new StringBuilder();
          
 			  	 for(int i=0; i< bytes.length ;i++)
          		 {
-              	 sb.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
+			  		 sb.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
          		 }
 			  	 hashedPassword = sb.toString();
       	} 
