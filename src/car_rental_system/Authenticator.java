@@ -2,10 +2,6 @@ package car_rental_system;
 
 import java.sql.*;
 
-import java.security.SecureRandom; //get salt
-import java.security.NoSuchAlgorithmException;// req'd exception error
-import java.security.MessageDigest;//convert to sha1-256
-
 public class Authenticator {
 
 	public static boolean authenticate(String email, String password) {
@@ -36,7 +32,7 @@ public class Authenticator {
 					String salt = hashTuple[1];
 					
 					// Recreate hash
-					String newHash = hash(password, salt);
+					String newHash = Helper.hash(password, salt);
 					
 					// Return TRUE if we found a user with given credentials, else return FALSE
 					return newHash.equals(originalHash);
@@ -48,49 +44,8 @@ public class Authenticator {
 			e.printStackTrace();
 		}
 		
-		return true; // true until hash() implemented
+		return false;
 
 	}
-	// salt = mcrypt(random integer)
-	public static String getNewSalt() throws NoSuchAlgorithmException {
 		
-		//generate a new salt and return as a string
-		SecureRandom random = new SecureRandom();
-		byte[] salt = new byte[24];
-		random.nextBytes(salt);
-		
-	  return salt.toString();
-	}
-	// hash = SHA256(password+salt)
-	public static String hash(String password, String salt) {
-		 
-		// TODO: implement hashing with salt
-		String hashedPassword = null;
-		try 
-		{
-          	//hash(password,salt) as sha-256
-			MessageDigest md = MessageDigest.getInstance("SHA-256");
-          	md.update(salt.getBytes());
-         	byte[] bytes = md.digest(password.getBytes());
-          	StringBuilder sb = new StringBuilder();
-         
-			  	 for(int i=0; i< bytes.length ;i++)
-         		 {
-			  		 //builds string with padding
-			  		 sb.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
-         		 }
-			  	 hashedPassword = sb.toString();
-      	} 
-      	catch (NoSuchAlgorithmException e) 
-        {
-           e.printStackTrace();
-        }
-		// return hash and salt in String
-		// use ':' to delimit hash and salt 
-		// eg. hash:salt
-	  // return = hash:salt
-      return hashedPassword + ":" + salt;//hash(password+salt):salt
-	}
-	
-	
 }
