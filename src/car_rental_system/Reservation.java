@@ -6,6 +6,7 @@ import java.util.ArrayList;
 public class Reservation {
 	
 	// Reservation fields
+	private int id;
 	
 	/*
 	 * Creates a new Reservation in the DB and returns
@@ -46,6 +47,21 @@ public class Reservation {
 		
 		return reservations;
 		
+	}
+	
+	/*
+	 * Cancels the Reservation specified
+	 * by the id.
+	 */
+	public static void cancel(int id) {
+		
+	}
+	
+	/*
+	 * Cancels the Reservation.
+	 */
+	public void cancel() {
+		Reservation.cancel(this.id);
 	}
 	
 }
