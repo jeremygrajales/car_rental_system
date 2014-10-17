@@ -67,35 +67,40 @@
 <h1>Sign Up</h1>
 <% if(!errors.isEmpty()) { %><div class="error">There were one or more errors in your submission.</div><% } %>
 <form action="" method="post">
-		<p><label>First Name:</label> <input <% if(errors.contains("namefirst")) out.print("class=\"error\" "); %>type="text" name="namefirst" placeholder='Enter First Name'></p>
+		<p>
+			<label>First Name:</label> <input class="error" type="text" name="namefirst" placeholder='Enter First Name'>
+			<span class="error">First Name must not be blank.</span>
+			<span class="error">First Name must be less than 50 characters.</span>
+		</p>
 		<p><label>Last Name:</label> <input <% if(errors.contains("namelast")) out.print("class=\"error\" "); %>type="text" name="namelast" placeholder='Enter Last Name'></p>
 		<p><label>Date of birth:</label>
-		<!--  TODO: need to implement dob field error --> 
-		<select id="form_dob_month" name="dob_month">
-			<option value="-">-</option>
-			<% 
-				LinkedHashMap<Integer, String> months = Helper.getMonths();
-				for(Map.Entry<Integer, String> month : months.entrySet()) {
-					out.println(String.format("<option value=\"%02d\">%s</option>", month.getKey(), month.getValue()));		
-				}
-			%>
-		</select>
-		<select id="form_dob_day" name="dob_day">
-			<option value="-">-</option>
-			<% 
-				for(int i = 1; i <= 31; i++) {
-					out.println(String.format("<option value=\"%02d\">%d</option>", i, i));		
-				}
-			%>
-		</select>
- 		<select id="form_dob_year" name="dob_year">
-			<option value="-">-</option>
-			<% 
-				for(int i = 2011; i >= 1959; i--) {
-					out.println(String.format("<option value=\"%d\">%d</option>", i, i));		
-				}
-			%>
-		</select>
+			<!--  TODO: need to implement dob field error --> 
+			<select id="form_dob_month" name="dob_month" class="error">
+				<option value="-">-</option>
+				<% 
+					LinkedHashMap<Integer, String> months = Helper.getMonths();
+					for(Map.Entry<Integer, String> month : months.entrySet()) {
+						out.println(String.format("<option value=\"%02d\">%s</option>", month.getKey(), month.getValue()));		
+					}
+				%>
+			</select>
+			<select id="form_dob_day" name="dob_day" class="error">
+				<option value="-">-</option>
+				<% 
+					for(int i = 1; i <= 31; i++) {
+						out.println(String.format("<option value=\"%02d\">%d</option>", i, i));		
+					}
+				%>
+			</select>
+	 		<select id="form_dob_year" name="dob_year" class="error">
+				<option value="-">-</option>
+				<% 
+					for(int i = 2011; i >= 1959; i--) {
+						out.println(String.format("<option value=\"%d\">%d</option>", i, i));		
+					}
+				%>
+			</select>
+			<span class="error">Date is invalid.</span>
 		</p>
 		<p><label>Street Address:</label> <input <% if(errors.contains("street")) out.print("class=\"error\" "); %>type="text" name="street" placeholder='Enter Last Name'></p>
 		<p><label>City:</label> <input <% if(errors.contains("city")) out.print("class=\"error\" "); %>type="text" name="city" placeholder='Enter Last Name'></p>

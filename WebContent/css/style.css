@@ -1,3 +1,16 @@
+input.error {
+	border:1px solid red;	
+}
+select.error {
+	border:1px solid red;	
+}
+span.error {
+	color:red;
+	float:right;
+	display:block;
+}
+
+
 body {
     font-family: Verdana, Arial, Helvetica, sans-serif;
     font-size: 13px;
