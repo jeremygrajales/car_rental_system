@@ -78,7 +78,16 @@ public class Helper {
 		months.put(12, "December");
 		return months;
 	}
-	
+
+	public static LinkedHashMap<Integer, String> getVehicleTypes() {
+		LinkedHashMap<Integer, String> months = new LinkedHashMap<Integer, String>();
+		months.put(1, "Compact");
+		months.put(2, "Full size");
+		months.put(3, "SUV");
+		months.put(4, "Van");
+		return months;
+	}
+
 	public static String cleanString(String value) {
 		return value; // TODO: implement cleaning to protect against SQL injection
 	}
