@@ -22,7 +22,7 @@ public class User {
 		Connection conn = Database.connect();
 		try {
 			Statement stmt = conn.createStatement();
-			String query = String.format("INSERT INTO `customer` VALUES (null, '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', null, null) ", nameFirst, nameLast, dob.toString(), email, addressStreet, addressCity, addressState, addressZip, hashTuple);
+			String query = String.format("INSERT INTO `customer` VALUES (null, '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', null, null) ", nameFirst, nameLast, dob.toString(), email, addressStreet, addressCity, addressState, addressZip+"", hashTuple);
 			stmt.executeUpdate(query);
 			// Generate a User instance
 			user = new User();
@@ -60,8 +60,8 @@ public class User {
 			if(result.next()) {
 				// Generate a User instance
 				user = new User();
-				user.nameFirst = result.getString("nameFirst");
-				user.nameLast = result.getString("nameLast");
+				user.nameFirst = result.getString("name_first");
+				user.nameLast = result.getString("name_last");
 				user.dob = result.getDate("dob");
 				user.email = result.getString("email");
 				user.addressStreet = result.getString("address_street");

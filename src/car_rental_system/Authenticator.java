@@ -10,7 +10,7 @@ public class Authenticator {
 		Helper.cleanString(password);
 		
 		// Get salt from hash
-		return true; // challengePassword(password, user.hash);
+		return challengePassword(password, user.hashTuple);
 		
 	}
 	
