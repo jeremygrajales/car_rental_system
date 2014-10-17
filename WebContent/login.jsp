@@ -1,8 +1,6 @@
 <%@ page import="java.io.*,java.util.*,java.sql.*"%>
 <%@ page import="javax.servlet.http.*,javax.servlet.*" %>
 <%@ page import="car_rental_system.*" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
 <%@ include file="layouts/header.jsp" %>
 <%
 	// Retreive form input
@@ -12,12 +10,18 @@
 	
 	// If the user is attempting to log in
 	if(email != null && password != null) {
-		// Redirect the user if they're authenticated
-		if(Authenticator.authenticate(email, password)) {
-			response.sendRedirect("dashboard.jsp");		
+	
+		// Find a matching User in the DB by e-mail
+		User user = User.getByEmail(email);
+		
+		// If the user authenticates
+		if(user != null && user.authenticate(password)) {
+			// Store the User in the session for later retrieval
+			session.setAttribute("currentUser", user);
+			// Redirect the user to the dashboard
+			response.sendRedirect("dashboard.jsp");
 		}
-		// Tell them they did something wrong
-		else {
+		else { // Tell them they did something wrong
 			error = "The email and/or password you provided is incorrect.";
 		}
 	}
