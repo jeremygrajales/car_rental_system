@@ -1,9 +1,11 @@
 package car_rental_system;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 public class User {
-	
+
+	private int id;
 	private String nameFirst;
 	private String nameLast;
 	private Date dob;
@@ -22,25 +24,23 @@ public class User {
 		Connection conn = Database.connect();
 		try {
 			Statement stmt = conn.createStatement();
-			String query = String.format("INSERT INTO `customer` VALUES (null, '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', null, null) ", nameFirst, nameLast, dob.toString(), email, addressStreet, addressCity, addressState, addressZip+"", hashTuple);
-			stmt.executeUpdate(query);
-			// Generate a User instance
-			user = new User();
-			user.nameFirst = nameFirst;
-			user.nameLast = nameLast;
-			user.dob = dob;
-			user.email = email;
-			user.addressStreet = addressStreet;
-			user.addressCity = addressCity;
-			user.addressState = addressState;
-			user.addressZip = addressZip;
-			user.hashTuple = hashTuple;
+			// Check if User already exists
+			if(!User.exists(email)) {
+				String query = String.format("INSERT INTO `customer` VALUES (null, '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', null, null) ", nameFirst, nameLast, dob.toString(), email, addressStreet, addressCity, addressState, addressZip+"", hashTuple);
+				stmt.executeUpdate(query);
+				// Generate a User instance
+				user = User.getByEmail(email);
+			}
 		}
 		catch(SQLException e) {
 			System.out.println(e.getMessage());
 		}
 		// return User instance
 		return user;		
+	}
+	
+	public static boolean exists(String email) {
+		return User.getByEmail(email) != null;
 	}
 	
 	public static User getByEmail(String email) {
@@ -60,6 +60,7 @@ public class User {
 			if(result.next()) {
 				// Generate a User instance
 				user = new User();
+				user.id = result.getInt("id");
 				user.nameFirst = result.getString("name_first");
 				user.nameLast = result.getString("name_last");
 				user.dob = result.getDate("dob");
@@ -83,5 +84,9 @@ public class User {
 		authenticated = Authenticator.authenticate(this, password);
 		return authenticated;
 	}	
+	
+	public ArrayList<Reservation> getReservations() {
+		return Reservation.getByUserId(this.id);
+	}
 	
 }
