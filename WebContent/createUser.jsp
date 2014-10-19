@@ -72,7 +72,10 @@
 			<span class="error">First Name must not be blank.</span>
 			<span class="error">First Name must be less than 50 characters.</span>
 		</p>
-		<p><label>Last Name:</label> <input <% if(errors.contains("namelast")) out.print("class=\"error\" "); %>type="text" name="namelast" placeholder='Enter Last Name'></p>
+		<p><label>Last Name:</label> <input <% if(errors.contains("namelast")) out.print("class=\"error\" "); %>type="text" name="namelast" placeholder='Enter Last Name'>
+			<span class="error">Last Name must not be blank.</span>
+			<span class="error">Last Name must be less than 50 characters.</span>
+		</p>
 		<p><label>Date of birth:</label>
 			<!--  TODO: need to implement dob field error --> 
 			<select id="form_dob_month" name="dob_month" class="error">
@@ -101,9 +104,18 @@
 				%>
 			</select>
 			<span class="error">Date is invalid.</span>
+			<span class="error">Must select a month</span>
+			<span class="error">Must select a day</span>
+			<span class="error">Must select a year</span>
 		</p>
-		<p><label>Street Address:</label> <input <% if(errors.contains("street")) out.print("class=\"error\" "); %>type="text" name="street" placeholder='Enter Last Name'></p>
-		<p><label>City:</label> <input <% if(errors.contains("city")) out.print("class=\"error\" "); %>type="text" name="city" placeholder='Enter Last Name'></p>
+		<p><label>Street Address:</label> <input <% if(errors.contains("street")) out.print("class=\"error\" "); %>type="text" name="street" placeholder='Enter Last Name'>
+			<span class="error">Street address is required</span>
+			<span class="error">Street address must be less than 50 characters</span>
+		</p>
+		<p><label>City:</label> <input <% if(errors.contains("city")) out.print("class=\"error\" "); %>type="text" name="city" placeholder='Enter Last Name'>
+			<span class="error">City must not be blank.</span>
+			<span class="error">City must be less than 50 characters.</span>
+		</p>
 		<p><label>State:</label>
 		<!--  TODO: need to implement state field error -->
 		<select name="state" size="1">
@@ -115,11 +127,25 @@
 				}
 			%>
 		</select>
+		<span class="error">State must be selected.</span>
 		</p>
-		<p><label>Zip Code:</label> <input <% if(errors.contains("zip")) out.print("class=\"error\" "); %>type="text" name="zip" placeholder='Enter Zip Code'></p>
-		<p><label>Email:</label> <input <% if(errors.contains("email")) out.print("class=\"error\" "); %>type="text" name="email" placeholder='example@email.com'></p>
-		<p><label>Password:</label> <input <% if(errors.contains("password")) out.print("class=\"error\" "); %>type="password" name="password" placeholder='**********'></p>
-		<p><label>Re-enter Password:</label> <input <% if(errors.contains("repassword")) out.print("class=\"error\" "); %>type="password" name="repassword" placeholder='**********'></p>
+		<p><label>Zip Code:</label> <input <% if(errors.contains("zip")) out.print("class=\"error\" "); %>type="text" name="zip" placeholder='Enter Zip Code'>
+			<span class="error">Zip code must not be blank.</span>
+			<span class="error">Zip code must be exactly 5 numbers.</span>
+		</p>
+		<p><label>Email:</label> <input <% if(errors.contains("email")) out.print("class=\"error\" "); %>type="text" name="email" placeholder='example@email.com'>
+			<span class="error">Email address must not be blank.</span>
+			<span class="error">Email address must be less than 50 characters.</span>
+			<span class="error">Email address must be in correct format <i>example: email@address.com</i></span>
+		</p>
+		<p><label>Password:</label> <input <% if(errors.contains("password")) out.print("class=\"error\" "); %>type="password" name="password" placeholder='**********'>
+			<span class="error">Password must be at least 8 characters and no more than 20 characters.</span>
+			<span class="error">Password must contain at least one number and one capital letter.</span>
+		</p>
+		<p><label>Re-enter Password:</label> <input <% if(errors.contains("repassword")) out.print("class=\"error\" "); %>type="password" name="repassword" placeholder='**********'>
+			<span class="error">Must re-enter password. Cannot be blank.</span>
+			<span class="error">Passwords do not match.</span>
+		</p>
 		<input type="submit" name="submit" value="Submit" />
 </form>
 <%@ include file="layouts/footer.jsp" %>
