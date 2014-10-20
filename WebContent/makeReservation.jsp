@@ -4,9 +4,10 @@
   <form method="post" action="">
       <fieldset>
 		<h1 style="text-align: center;">Make Reservation</h1>
-		<p><label>Pick up Location:</label> <input type="text" size ="50" maxlength="50" placeholder='City, State, Zip Code'></p>
+		<p><label>Pick up Location:</label> <input type="text" size ="50" maxlength="50" placeholder='City, State, Zip Code'>
+		<span class="error">You must enter the city, state and Zip Code</span></p>
 		
-		<p><label>Pick up Date & Time:</label> <select><option>Month</option>
+		<p><label>Pick up Date and Time:</label> <select><option>Month</option>
 														<option>January</option>
 														<option>February</option>
 														<option>March</option>
@@ -82,7 +83,16 @@
 												</select>
 												
 												<select><option>a.m.</option>
-														<option>p.m.</option></select></p>
+														<option>p.m.</option></select>
+														<span class="error"> You must select a Month, day, year and a valid time</span>
+														
+														&nbsp;
+														&nbsp;
+														&nbsp;
+														&nbsp;
+
+														</p>
+													
 														
 														
 		<p><label>Return Date & Time:</label>
@@ -162,7 +172,9 @@
 												</select>
 												
 												<select><option>a.m.</option>
-														<option>p.m.</option></select></p>
+														<option>p.m.</option></select>
+														<span class="error">You must select a Month, day, year and a valid time</span>
+														</p>
 		
 		
 		
@@ -176,7 +188,9 @@
 												<option>SUV</option>
 												<option>Van</option>
 												
-												</select></p>
+												</select>
+												<span class="error">You must select a vehicle type</span>
+												</p>
 												
 												
 		<p><label>Renter's Age:</label> <select><option>Age</option>
@@ -190,7 +204,9 @@
 												<option>18</option>
 		
 		
-		</select></p>
+		</select>
+		<span style="float:right"class="error">You must select an age</span>
+		</p>
 		
 		<!--<p><label>Phone:</label> <input type="text" name="phone" style="width: 30px;"> - <input type="text" name="phone" style="width: 30px;"> - <input type="text" name="phone" style="width: 50px;"></p>
 		<p><label>Select Doctor:</label>
