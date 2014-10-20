@@ -1,7 +1,7 @@
 <%@ page import="java.io.*,java.util.*,java.sql.*"%>
 <%@ page import="javax.servlet.http.*,javax.servlet.*" %>
 <%@ page import="car_rental_system.*" %>
-<%@include file="layouts/header.jsp" %>
+<%@include file="layouts/header2.jsp" %>
 
 	<form>
 		<fieldset>
