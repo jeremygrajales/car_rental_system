@@ -28,15 +28,12 @@
 	String vehicle = request.getParameter("vehicle");
 	String age = request.getParameter("renter_age");
 	
-	ArrayList<String> errors = new ArrayList<String>();
+	//ArrayList<String> errors = new ArrayList<String>();
 	
 	if(request.getParameter("submit") != null)
 	{
 		//and no errors found //store reservation in database
-	}
 	
-	if(!errors)
-	{
 		Date pudate = Date.valueOf(puDate);
 		Date rdate = Date.valueOf(rDate);
 		Reservation reservation = Reservation.create(location, pudate, pickTime, rdate, retTime, vehicle);
@@ -44,14 +41,14 @@
 
 %>
 
-
+<!--Since I have drop down list, no need to check if option selected??-->
   <form method="post" action="">
       <fieldset>
 		<h1 style="text-align: center;">Make Reservation</h1>
-		<p><label>Pick up Location:</label> <input name="location" type="text" size ="50" maxlength="50" placeholder='City, State, Zip Code'>
+		<p><label>Pick up Location:</label> <input name="location" type="text" size ="50" maxlength="50" placeholder='City, State, Zip Code' required>
 		<span class="error">You must enter the city, state and Zip Code</span></p>
 		
-		<p><label>Pick up Date and Time:</label> <select name="pu_month"><option value="null">Month</option>
+		<p><label>Pick up Date and Time:</label> <select name="pu_month">
 														<option value="January">January</option>
 														<option value="Februrary">February</option>
 														<option value="March">March</option>
@@ -68,7 +65,7 @@
 												
 												
 												
-												<select name="pu_day"><option>Day</option>
+												<select name="pu_day">
 														<option value="1">1</option>
 														<option value="2">2</option>
 														<option value="3">3</option>
@@ -103,14 +100,14 @@
 												</select>
 												
 												
-												<select name="pu_year"><option>Year</option>
+												<select name="pu_year">
 													    <option value="2014">2014</option>
 														<option value="2015">2015</option>
 														<option value="2016">2016</option>
 														<option value="2017">2017</option>
 												</select>
-												<select name="pu_time"><option>Time</option>
-																											<option value="1">1:00</option>
+												<select name="pu_time">
+														<option value="1">1:00</option>
 														<option value="2">2:00</option>
 														<option value="3">3:00</option>
 														<option value="4">4:00</option>
@@ -139,7 +136,7 @@
 														
 														
 		<p><label>Return Date & Time:</label>
-											 <select name="r_month"><option value="null">Month</option>
+											 <select name="r_month">
 														<option value="January">January</option>
 														<option value="Februrary">February</option>
 														<option value="March">March</option>
@@ -156,7 +153,7 @@
 												
 												
 												
-												<select name="r_day"><option>Day</option>
+												<select name="r_day">
 														<option value="1">1</option>
 														<option value="2">2</option>
 														<option value="3">3</option>
@@ -191,14 +188,14 @@
 												</select>
 												
 												
-												<select name="r_year"><option>Year</option>
+												<select name="r_year">
 														<option value="2014">2014</option>
 														<option value="2015">2015</option>
 														<option value="2016">2016</option>
 														<option value="2017">2017</option>
 												
 												</select>
-												<select name ="r_time"><option value="null">Time</option>
+												<select name ="r_time">
 														<option value="1">1:00</option>
 														<option value="2">2:00</option>
 														<option value="3">3:00</option>
@@ -225,7 +222,7 @@
 		
 		
 		
-		<p><label>Vehicle Type:</label> <select name="vehicle"><option value="null">Choose Type</option>
+		<p><label>Vehicle Type:</label> <select name="vehicle">
 												<option value="Compact">Compact</option>
 												<option value="Full Size">Full size</option>
 												<option value="SUV">SUV</option>
@@ -236,7 +233,7 @@
 												</p>
 												
 												
-		<p><label>Renter's Age:</label> <select name="renter_age"><option value="null">Age</option>
+		<p><label>Renter's Age:</label> <select name="renter_age">
 												<option value="25">25 +</option>
 												<option value="24">24</option>
 												<option value="23">23</option>
