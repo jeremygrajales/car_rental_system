@@ -1,9 +1,13 @@
 package car_rental_system;
 
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.security.SecureRandom;
-import java.util.LinkedHashMap;
+import java.security.*;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.text.*;
+import java.util.*;
+import java.text.ParseException;
 
 public class Helper {
 	
@@ -80,12 +84,24 @@ public class Helper {
 	}
 
 	public static LinkedHashMap<Integer, String> getVehicleTypes() {
-		LinkedHashMap<Integer, String> months = new LinkedHashMap<Integer, String>();
-		months.put(1, "Compact");
-		months.put(2, "Full size");
-		months.put(3, "SUV");
-		months.put(4, "Van");
-		return months;
+		
+		LinkedHashMap<Integer, String> vehicleTypes = new LinkedHashMap<Integer, String>();
+		
+		// Fetch vehicle classes from DB
+		Connection conn = Database.connect();
+		try {
+				Statement stmt = conn.createStatement();
+				String sql = "SELECT * FROM 'vehicle_type'";			
+				ResultSet result = stmt.executeQuery(sql);
+				
+				if(result.next())
+					vehicleTypes.put(result.getInt("id"), result.getString("tyepe"));
+				return vehicleTypes;
+		}
+		catch(SQLException e) {
+			System.out.println(e.getMessage());
+		}
+		return null;
 	}
 
 	public static String cleanString(String value) {
@@ -122,13 +138,28 @@ public class Helper {
 		return hashedPassword;
 	}
 	
+	public static long parseDateTime(String date, String time) {
+		// Generate timestamp from date and time
+		DateFormat df = DateFormat.getDateTimeInstance();
+		try {
+			return df.parse(date + " " + time).getTime();	
+		}
+		catch(ParseException e) {
+			System.out.println("Could not parse date/time string: " + e.getMessage()); // TODO: implement logging
+		}
+		return -1;
+	}
+	
+	public static int getRandomId() {
+		SecureRandom random = new SecureRandom();
+		return random.nextInt(8);
+	}
+	
 	public static String getNewSalt() {
-		
 		// Generate a new salt and return as a string
 		SecureRandom random = new SecureRandom();
 		byte[] salt = new byte[24];
 		random.nextBytes(salt);
 		return salt.toString();
-		
 	}
 }
