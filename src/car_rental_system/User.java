@@ -5,17 +5,17 @@ import java.util.ArrayList;
 
 public class User {
 
-	private int id;
-	private String nameFirst;
-	private String nameLast;
-	private Date dob;
-	private String email;
-	private String addressStreet;
-	private String addressState;
-	private String addressCity;
-	private int addressZip;
+	public int id;
+	public String nameFirst;
+	public String nameLast;
+	public Date dob;
+	public String email;
+	public String addressStreet;
+	public String addressState;
+	public String addressCity;
+	public int addressZip;
 	public String hashTuple;
-	private boolean authenticated = false;
+	public boolean authenticated = false;
 	
 	// Create new User in the DB and return a new User instance
 	public static User create(String nameFirst, String nameLast, Date dob, String email, String addressStreet, String addressCity, String addressState, int addressZip, String hashTuple) {
