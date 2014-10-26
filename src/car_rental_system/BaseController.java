@@ -1,6 +1,7 @@
 package car_rental_system;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -8,16 +9,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class UserController
+ * Servlet implementation class BaseController
  */
-@WebServlet("/user/*")
-public class UserController extends HttpServlet {
+@WebServlet("/")
+public class BaseController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
-     * @see HttpSer	vlet#HttpServlet()
+     * @see HttpServlet#HttpServlet()
      */
-    public UserController() {
+    public BaseController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -27,20 +28,19 @@ public class UserController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String path = request.getPathInfo();
+		String path = "" + request.getPathInfo();
+		path = (path == null ? path : "");
 		String view = null;
 		
-		if(path.equals("/create")) {
-			view = "/user/create";
-		}
-		else if(path.equals("/thankyou")) {
-			view = "/user/create-thankyou";
+		if(path.equals("/login")) {
+			view = "/login";
+			System.out.println("logging in");
 		}
 		
 		if(view != null) {
 			try {
 				request.getRequestDispatcher("/WEB-INF/views" + view + ".jsp").forward(request, response);
-			}
+			}	
 			catch(Exception e) {
 				System.out.println(e.getMessage());
 			}
