@@ -1,7 +1,8 @@
 package car_rental_system;
 
 import java.util.*;
-import java.util.LinkedHashMap;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class FormValidator {
 	
@@ -10,7 +11,7 @@ public class FormValidator {
 		
 		//check to see if february 29 is valid for given year
 		if(month == 2 && day == 29){
-			if ((year % 400 != 0) || ((year % 4 != 0) && (year % 100 == 0))) {
+			if ((year % 400 != 0) || ((year % 4 != 0) && (year % 100 == 0)))
 				return false;
 		} 
 		return true;
