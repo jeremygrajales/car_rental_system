@@ -40,7 +40,7 @@ public class FormValidator {
 	public static void validateInteger(String input) throws InvalidFieldException {
 		
 		//check to see if input is only numbers 0 to 9
-		if(input.matches("[0-9]+"))
+		if(!input.matches("[0-9]+"))
 			throw new InvalidFieldException();
 	}
 	
