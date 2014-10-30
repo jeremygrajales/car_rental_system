@@ -5,7 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Thunder Chickens Car Rental Service</title>
-<link rel="stylesheet" type="text/css" href="css/style.css">
+<link rel="stylesheet" type="text/css" href="<% out.print(request.getContextPath() + "/css/style.css"); %>">
 </head>
 <body>
 <div id="wrapper">
@@ -14,9 +14,9 @@
 </div>
 <div id="navigation">
 	<ul>
-	<li><a href=dashboard.jsp>Home</a></li>
-	<li><a href=createUser.jsp>Create User</a></li>
-	<li><a href=login.jsp>Login</a></li>	
+	<li><a href="<% out.print(request.getContextPath() + "/dashboard"); %>">Home</a></li>
+	<li><a href="<% out.print(request.getContextPath() + "/user/create"); %>">Create User</a></li>
+	<li><a href="<% out.print(request.getContextPath() + "/user/login"); %>">Login</a></li>	
 	</ul>
 </div>
 <div id="content">

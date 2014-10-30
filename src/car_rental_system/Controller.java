@@ -1,16 +1,15 @@
 package car_rental_system;
 
 import java.io.IOException;
-import javax.servlet.Filter;
-import javax.servlet.FilterChain;
-import javax.servlet.FilterConfig;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public abstract class Controller implements Filter {
+public abstract class Controller {
 	
 	protected HttpServletRequest request;
 	protected HttpServletResponse response;
@@ -23,58 +22,42 @@ public abstract class Controller implements Filter {
 		base = name;
 	}
 	
-	public void destroy() {
-		
+	public void process(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+		this.request = request;
+		this.response = response;
+		if(request.getMethod().equals(Route.METHOD_GET))
+			doGet(request, response);
+		else if(request.getMethod().equals(Route.METHOD_POST))
+			doPost(request, response);
 	}
-		
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)  throws IOException, ServletException {}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)  throws IOException, ServletException {}
 	
-	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-		
-		HttpServletRequest _request = (HttpServletRequest)request;
-		this.request = _request;
-		HttpServletResponse _response = (HttpServletResponse)response;
-		this.response = _response;
-		
-		// Process request
-		if(_request.getMethod().equals("GET"))
-			doGet(_request, _response);
-		else if(_request.getMethod().equals("POST")) 
-			doPost(_request, _response);
-		
-		// If that controller didn't give us a response
-		if(!response.isCommitted()) {
-			// Move on to the next Controller
-			chain.doFilter(request, response);
-		}
-	}
-	
 	public void makeView(String view) {
-		System.out.println("here");
 		if(view != null) {
 			try {
-				request.getRequestDispatcher("/WEB-INF/views/" + view + ".jsp").forward(request, response);
-			} catch (ServletException | IOException e) {
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views" + view + ".jsp");
+				dispatcher.forward((ServletRequest)request, (ServletResponse)response);
+			}
+			catch (ServletException | IOException e) {
 				e.printStackTrace();
 			}
 		}
 	} 
 	
-	public boolean isPath(String path) {
+	public boolean isPath(String path, HttpServletRequest request) {
 		
 		String requestURI = request.getRequestURI();
-		String contextPath = request.getServletContext().getContextPath();
+		String contextPath = request.getContextPath();
 		String requestedPath = "";
-
+		path = path.startsWith("/") ? path : "/"+path; // prepend forward slash
+		path = path.equals("/") ? "" : path; // remove lonely forward slashes
+		
 		if (requestURI.startsWith(contextPath)) {
 		  	requestedPath = requestURI.substring(contextPath.length());
 		}
-		System.out.println(requestedPath + ":" + (base + "/" + path));
-		return  requestedPath.equals(base + "/" + path);
-	}
-	
-	public void init(FilterConfig fConfig) throws ServletException {
 		
+		return  requestedPath.equals(path);
 	}
 }

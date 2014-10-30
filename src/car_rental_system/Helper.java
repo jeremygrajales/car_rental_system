@@ -5,11 +5,18 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
 import java.text.*;
 import java.util.*;
 import java.text.ParseException;
 
 public class Helper {
+	
+	public static Object firstNonNull(Object obj1, Object obj2) {
+		if(obj1 == null && obj2 == null)
+			throw new NullPointerException();
+		return obj1 != null ? obj1 : obj2; 
+	}
 	
 	public static LinkedHashMap<String, String> getStates() {
 		LinkedHashMap<String, String> states = new LinkedHashMap<String, String>();
@@ -91,11 +98,11 @@ public class Helper {
 		Connection conn = Database.connect();
 		try {
 				Statement stmt = conn.createStatement();
-				String sql = "SELECT * FROM 'vehicle_type'";			
+				String sql = "SELECT * FROM `vehicle_type`";			
 				ResultSet result = stmt.executeQuery(sql);
 				
-				if(result.next())
-					vehicleTypes.put(result.getInt("id"), result.getString("tyepe"));
+				while (result.next())
+					vehicleTypes.put(result.getInt("id"), result.getString("type"));
 				return vehicleTypes;
 		}
 		catch(SQLException e) {
@@ -137,12 +144,21 @@ public class Helper {
 		// return hash
 		return hashedPassword;
 	}
+
+	public static String timestampToDate(Timestamp timestamp, String format) {
+		SimpleDateFormat df = new SimpleDateFormat(format);
+		return df.format(timestamp);
+	}
+		
+	public static long dateToUnixTimestamp(String date) {
+		return Helper.dateToUnixTimestamp(date, "00:00 AM");
+	}
 	
-	public static long parseDateTime(String date, String time) {
+	public static long dateToUnixTimestamp(String date, String time) {
 		// Generate timestamp from date and time
-		DateFormat df = DateFormat.getDateTimeInstance();
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd hh:mm aa");
 		try {
-			return df.parse(date + " " + time).getTime();	
+			return df.parse(date + " " + time).getTime()/1000;	
 		}
 		catch(ParseException e) {
 			System.out.println("Could not parse date/time string: " + e.getMessage()); // TODO: implement logging
@@ -150,9 +166,11 @@ public class Helper {
 		return -1;
 	}
 	
-	public static int getRandomId() {
+	public static int getNewReservationId() {
 		SecureRandom random = new SecureRandom();
-		return random.nextInt(8);
+		int min = 100000000;
+		int max = 999999999;
+		return random.nextInt(max-min+1)+min;
 	}
 	
 	public static String getNewSalt() {

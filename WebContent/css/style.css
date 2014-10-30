@@ -1,4 +1,6 @@
-
+.color-red {
+	color:red;
+}
 
 input.error {
 	border:1px solid red;	
@@ -9,8 +11,7 @@ select.error {
 span.error {
 	color:red;
 	float:right;
-	display:block;
-	display:none;
+	display:block;	
 }
 
 body {

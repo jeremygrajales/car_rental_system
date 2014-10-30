@@ -13,14 +13,14 @@ public class Reservation {
 	static String STATUS_CONFIRMED = "confirmed";	
 	
 	// Reservation fields
-	private int id;
-	private String location;
-	private Timestamp pickupTimestamp;
-	private Timestamp returnTimestamp;
-	private int customerId;
-	private int vehicleTypeId;
-	private int vehicleId;
-	private String status;
+	public int id;
+	public String location;
+	public Timestamp pickupTimestamp;
+	public Timestamp returnTimestamp;
+	public int customerId;
+	public int vehicleTypeId;
+	public int vehicleId;
+	public String status;
 	
 	/*
 	 * Creates a new Reservation in the DB and returns
@@ -32,19 +32,21 @@ public class Reservation {
 		Reservation reservation = null;
 		
 		// Produce unique random reservation
-		int reservationId = Helper.getRandomId();
+		int reservationId = Helper.getNewReservationId();
 		while(getById(reservationId) != null){
-			reservationId = Helper.getRandomId();
+			reservationId = Helper.getNewReservationId();
 		}
+		System.out.println("The customer's reservation ID is: " + reservationId);
 		
 		Connection conn = Database.connect();
 		try {
 			// Generate timestamps as longs 
-			long pTimestamp = Helper.parseDateTime(pDate, pTime);
-			long rTimestamp = Helper.parseDateTime(rDate, rTime);
+			long pTimestamp = Helper.dateToUnixTimestamp(pDate, pTime);
+			long rTimestamp = Helper.dateToUnixTimestamp(rDate, rTime);
 			
 			Statement stmt = conn.createStatement();
-			String sql = String.format("INSERT INTO `reservation` values(%d, %s, %d, %d, %d, %s, null, null);", reservationId, location, pTimestamp, rTimestamp, custId, Reservation.STATUS_UNCONFIRMED, vehicleTypeId);
+			String sql = String.format("INSERT INTO `reservation` values(%d, '%s', FROM_UNIXTIME(%d), FROM_UNIXTIME(%d), %d, %d, null, '%s', null, null);", reservationId, location, pTimestamp, rTimestamp, custId, vehicleTypeId, Reservation.STATUS_UNCONFIRMED);
+			System.out.println(sql);
 			stmt.executeUpdate(sql);
 		}
 		catch(SQLException e) {
@@ -69,7 +71,7 @@ public class Reservation {
 		try {
 				Statement stmt = conn.createStatement();
 			
-				String sql = String.format("SELECT * FROM 'reservation' WHERE 'id'='%d';", id);
+				String sql = String.format("SELECT * FROM `reservation` WHERE `id`= '%d' AND status != 'cancelled';", id);
 				ResultSet result = stmt.executeQuery(sql);
 				
 				if(result.next())
@@ -106,7 +108,7 @@ public class Reservation {
 		try {
 				Statement stmt = conn.createStatement();
 			
-				String sql = String.format("SELECT * FROM 'reservation' WHERE 'cust_id'='%d';", userId);
+				String sql = String.format("SELECT * FROM `reservation` WHERE `cust_id`='%d' AND status != 'cancelled';", userId);
 				ResultSet result = stmt.executeQuery(sql);
 				
 				// Loop through all results 
@@ -143,10 +145,8 @@ public class Reservation {
 		Connection conn = Database.connect();
 		try {
 			Statement stmt = conn.createStatement();
-			
-				String sql = String.format("DELETE FROM 'reservation' WHERE 'id'='%d';", id);
+				String sql = String.format("UPDATE `reservation` SET status='cancelled', deleted=NOW() WHERE `id`='%d';", id);
 				stmt.executeUpdate(sql);
-				
 		     }
 		catch(SQLException e) {
 			System.out.println(e.getMessage());
