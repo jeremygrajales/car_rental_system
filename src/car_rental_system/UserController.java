@@ -156,7 +156,7 @@ public class UserController extends Controller {
 					User user = User.create(nameFirst, nameLast, date, email, street, city, state, Integer.parseInt(zip), hashTuple[0]+":"+hashTuple[1]);
 				}
 				else { // Store errors in session
-					Session.flashAll(request.getParameterMap());
+					//Session.flashAll(request.getParameterMap());
 					session.setAttribute("errors", errors);
 				}
 				
