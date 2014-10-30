@@ -20,4 +20,5 @@
 				</p>
 				<input type="submit" name="submit" value="Submit"/>
 			</form>
+			
 <%@ include file="../layouts/footer.jsp" %>

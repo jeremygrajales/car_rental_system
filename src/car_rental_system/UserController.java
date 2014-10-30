@@ -25,7 +25,7 @@ public class UserController extends Controller {
 			HttpSession session = request.getSession();
 			session.removeAttribute("currentUser");
 			try {
-				response.sendRedirect(request.getContextPath());
+				response.sendRedirect(request.getContextPath() + "/home");
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

@@ -10,8 +10,12 @@ public class BaseController extends Controller {
     }
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) {
+    	/*if(isPath("/home", request)) {
+    		makeView("/home/index");
+    	}
     	if(isPath("login", request)) {
 			makeView("login");
-    	}
+    	}*/
+		makeView("/home/index");
 	}
 }

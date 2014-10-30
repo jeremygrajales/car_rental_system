@@ -16,7 +16,7 @@
 	<ul>	
 	<li><a href="<% out.print(request.getContextPath() + "/dashboard/reservation/create"); %>">Make Reservation</a></li>
 	<li><a href="<% out.print(request.getContextPath() + "/dashboard/reservation/list"); %>">My Reservations</a></li>
-	<li><a href="<% out.print(request.getContextPath() + "/dashboard/user/logout"); %>">Log Out</a>
+	<li><a href="<% out.print(request.getContextPath() + "/user/logout"); %>">Log Out</a>
 	</ul>
 </div>
 <div id="content">

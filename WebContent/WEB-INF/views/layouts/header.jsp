@@ -14,7 +14,7 @@
 </div>
 <div id="navigation">
 	<ul>
-	<li><a href="<% out.print(request.getContextPath() + "/dashboard"); %>">Home</a></li>
+	<li><a href="<% out.print(request.getContextPath() + "/home"); %>">Home</a></li>
 	<li><a href="<% out.print(request.getContextPath() + "/user/create"); %>">Create User</a></li>
 	<li><a href="<% out.print(request.getContextPath() + "/user/login"); %>">Login</a></li>	
 	</ul>

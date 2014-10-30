@@ -42,8 +42,7 @@
 			</table>
 			<%
 				}
-			%>
-			<button type="button">Submit</button>
+			%>		
 		</fieldset>
 	</form>
 

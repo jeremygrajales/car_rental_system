@@ -1,4 +1,4 @@
-<%@include file="../layouts/header.jsp" %>
+<%@include file="../layouts/header2.jsp" %>
 
 
 
