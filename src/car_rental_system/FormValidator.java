@@ -1,17 +1,23 @@
 package car_rental_system;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class FormValidator {
 	
-	// Leap year validation // return true if valid
+	// Date validation // return true if valid
 	public static boolean validateDate(int year, int month, int day) {
-		//check to see if february 29 is valid for given year
-		if(month == 2 && day == 29)
-			return isLeapYear(year);
-		return true;	
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+		df.setLenient(false);	
+		try {
+			df.parse(year + "-" + month + "-" + day);
+			return true;
+		} catch (ParseException e) {
+			return false;
+		}
 	}
 	
 	public static boolean validateDateBefore(Date earlier, Date later) {
@@ -20,10 +26,6 @@ public class FormValidator {
 	
 	public static boolean validateDateAfter(Date earlier, Date later) {
 		return later.after(earlier);
-	}
-	
-	public static boolean isLeapYear(int year) {
-		return ((year % 400 == 0) || ((year % 100 != 0) && (year % 4 == 0)));
 	}
 	
 	// Returns false if input is blank
