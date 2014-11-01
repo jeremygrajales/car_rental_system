@@ -84,11 +84,11 @@ public class UserController extends Controller {
 			}
 			else {
 				// first name
-				errors.add(FormValidator.validateNotBlank(nameFirst, true) ? new String[]{"namefirst_blank", "namefirst"} : null);
-				errors.add(FormValidator.validateLength(nameFirst, 0, 50) ? new String[]{"namefirst_length", "namefirst"} : null);
+				errors.add(!FormValidator.validateNotBlank(nameFirst, true) ? new String[]{"namefirst_blank", "namefirst"} : null);
+				errors.add(!FormValidator.validateLength(nameFirst, 0, 50) ? new String[]{"namefirst_length", "namefirst"} : null);
 				// last name
-				errors.add(FormValidator.validateNotBlank(nameLast, true) ? new String[]{"namelast_blank", "namelast"} : null);
-				errors.add(FormValidator.validateLength(nameLast, 0, 50) ? new String[]{"namelast_length", "namelast"} : null);
+				errors.add(!FormValidator.validateNotBlank(nameLast, true) ? new String[]{"namelast_blank", "namelast"} : null);
+				errors.add(!FormValidator.validateLength(nameLast, 0, 50) ? new String[]{"namelast_length", "namelast"} : null);
 				// date of birth
 				int year = 0, month = 0, day = 0;
 				try {
@@ -97,28 +97,28 @@ public class UserController extends Controller {
 					day = Integer.parseInt(dobDay);
 				}
 				catch(NumberFormatException e) { errors.add("dob"); }
-				errors.add(FormValidator.validateDate(year, month, day) ? "dob" : null); 
+				errors.add(!FormValidator.validateDate(year, month, day) ? "dob" : null); 
 				// street
-				errors.add(FormValidator.validateNotBlank(street, true) ? new String[]{"street_blank", "street"} : null);
-				errors.add(FormValidator.validateLength(street, 0, 255) ? new String[]{"street_length", "street"} : null);
+				errors.add(!FormValidator.validateNotBlank(street, true) ? new String[]{"street_blank", "street"} : null);
+				errors.add(!FormValidator.validateLength(street, 0, 255) ? new String[]{"street_length", "street"} : null);
 				// city
-				errors.add(FormValidator.validateNotBlank(city, true) ? new String[]{"city_blank", "city"} : null);
-				errors.add(FormValidator.validateLength(city, 0, 50) ? new String[]{"city_length", "city"} : null);
+				errors.add(!FormValidator.validateNotBlank(city, true) ? new String[]{"city_blank", "city"} : null);
+				errors.add(!FormValidator.validateLength(city, 0, 50) ? new String[]{"city_length", "city"} : null);
 				// state
-				errors.add(FormValidator.validateState(state) ? "state" : null);
+				errors.add(!FormValidator.validateState(state) ? "state" : null);
 				// zip
-				errors.add(FormValidator.validateNotBlank(zip, true) ? new String[]{"zip_blank", "zip"} : null);
-				errors.add(FormValidator.validateInteger(zip) ? new String[]{"zip_integer", "zip"} : null);
-				errors.add(FormValidator.validateLength(zip, 5, 5) ? new String[]{"zip_length", "zip"} : null);
+				errors.add(!FormValidator.validateNotBlank(zip, true) ? new String[]{"zip_blank", "zip"} : null);
+				errors.add(!FormValidator.validateInteger(zip) ? new String[]{"zip_integer", "zip"} : null);
+				errors.add(!FormValidator.validateLength(zip, 5, 5) ? new String[]{"zip_length", "zip"} : null);
 				// email
-				errors.add(FormValidator.validateNotBlank(email, true) ? new String[]{"email_blank", "email"} : null);
-				errors.add(FormValidator.validateLength(email, 0, 50) ? new String[]{"email_length", "email"} : null);
-				errors.add(FormValidator.validateEmail(email) ? new String[]{"email_valid", "email"} : null);
+				errors.add(!FormValidator.validateNotBlank(email, true) ? new String[]{"email_blank", "email"} : null);
+				errors.add(!FormValidator.validateLength(email, 0, 50) ? new String[]{"email_length", "email"} : null);
+				errors.add(!FormValidator.validateEmail(email) ? new String[]{"email_valid", "email"} : null);
 				// password
-				errors.add(FormValidator.validateNotBlank(password, true) ? new String[]{"password_blank", "password"} : null);
-				errors.add(FormValidator.validateLength(password, 8, 20) ? new String[]{"password_length", "password"} : null);
-				errors.add(FormValidator.validatePasswordStrength(password) ? new String[]{"password_valid", "password"} : null);
-				errors.add(FormValidator.validatePasswordMatch(password, repassword) ? new String[]{"repassword_valid", "repassword"} : null);
+				errors.add(!FormValidator.validateNotBlank(password, true) ? new String[]{"password_blank", "password"} : null);
+				errors.add(!FormValidator.validateLength(password, 8, 20) ? new String[]{"password_length", "password"} : null);
+				errors.add(!FormValidator.validatePasswordStrength(password) ? new String[]{"password_valid", "password"} : null);
+				errors.add(!FormValidator.validatePasswordMatch(password, repassword) ? new String[]{"repassword_valid", "repassword"} : null);
 				 
 			}
 			// If no errors exist
