@@ -1,17 +1,17 @@
-.color-red {
+.error {
 	color:red;
 }
 
-input.error {
-	border:1px solid red;	
+input.error, select.error {
+	border:1px solid red;
 }
-select.error {
-	border:1px solid red;	
+
+.errors .error {
+	display:none;	
 }
-span.error {
-	color:red;
-	float:right;
-	display:block;	
+
+.errors .error:first-child {
+	display:block !important;	
 }
 
 body {

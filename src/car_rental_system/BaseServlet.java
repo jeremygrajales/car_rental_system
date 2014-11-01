@@ -36,6 +36,7 @@ public class BaseServlet extends HttpServlet {
     	Route.create("/dashboard", "DashboardController", Route.METHOD_GET, true);
     	Route.create("/dashboard/reservation/create", "ReservationController", Route.METHOD_GET, true);
     	Route.create("/dashboard/reservation/create", "ReservationController", Route.METHOD_POST, true);
+    	Route.create("/dashboard/reservation/create/thankyou", "ReservationController", Route.METHOD_GET, true);
     	Route.create("/dashboard/reservation/cancel", "ReservationController", Route.METHOD_POST, true);
     	Route.create("/dashboard/reservation/show", "ReservationController", Route.METHOD_GET, true);
     	Route.create("/dashboard/reservation/list", "ReservationController", Route.METHOD_GET, true);
@@ -57,7 +58,8 @@ public class BaseServlet extends HttpServlet {
 	
 	private void process(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		// Initialize the session for this request
-		//Session.initialize(request.getSession(true));
+		Session.initialize(request.getSession(true));
+		Response.initialize(response);
 		
 		Controller controller = Route.getController(request);
 		String url = request.getRequestURL().toString();

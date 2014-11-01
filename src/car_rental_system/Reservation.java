@@ -43,10 +43,9 @@ public class Reservation {
 			// Generate timestamps as longs 
 			long pTimestamp = Helper.dateToUnixTimestamp(pDate, pTime);
 			long rTimestamp = Helper.dateToUnixTimestamp(rDate, rTime);
-			
+
 			Statement stmt = conn.createStatement();
 			String sql = String.format("INSERT INTO `reservation` values(%d, '%s', FROM_UNIXTIME(%d), FROM_UNIXTIME(%d), %d, %d, null, '%s', null, null);", reservationId, location, pTimestamp, rTimestamp, custId, vehicleTypeId, Reservation.STATUS_UNCONFIRMED);
-			System.out.println(sql);
 			stmt.executeUpdate(sql);
 		}
 		catch(SQLException e) {
