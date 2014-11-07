@@ -52,8 +52,9 @@ public class User {
 		User user = null;
 		
 		// Query the database for a matching User
-		Connection conn = Database.connect();
+		Connection conn = null;
 		try {
+			conn = Database.connect();
 			Statement stmt = conn.createStatement();
 			String query = String.format("SELECT * FROM `customer` WHERE `email`='%s';", email);
 			ResultSet result = stmt.executeQuery(query);
@@ -71,9 +72,10 @@ public class User {
 				user.addressZip = result.getInt("address_zip");
 				user.hashTuple = result.getString("hash");
 			}
+			conn.close();
 		}
 		catch(SQLException e) {
-			// TODO: implement exception handling.
+			System.out.println("DB EXCEPTION...");
 		}
 		// return User instance
 		return user;	
@@ -87,6 +89,26 @@ public class User {
 	
 	public ArrayList<Reservation> getReservations() {
 		return Reservation.getByUserId(this.id);
+	}
+	
+	public boolean isAdmin() {
+		return User.isAdmin(this);
+	}
+	
+	public static boolean isAdmin(User user) {
+		
+		// Query the database for a matching User
+		Connection conn = Database.connect();
+		try {
+			Statement stmt = conn.createStatement();
+			String query = String.format("SELECT * FROM `admin` WHERE `id`='%d';", user.id);
+			ResultSet result = stmt.executeQuery(query);
+			return result.next();
+		}
+		catch(SQLException e) {
+			// 
+		}
+		return false;
 	}
 	
 }
